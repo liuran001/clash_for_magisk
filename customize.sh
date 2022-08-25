@@ -213,10 +213,3 @@ ui_print "- 如果失败请手动安装 安装包文件在:/data/adb/modules/Cla
 ui_print "- magisk lite版本在/data/adb/modules_lite/Clash_For_Magisk/apk/dashBoard.apk"
 fi
 ui_print "- 安装完成"
-ui_print "
-更新日志:
-新增:
--WaitClashStartTime变量(clash.config) 修改等待clash启动时间(单位:秒)，过短会导致端口检测误判(跳过端口检查时无效)
--global(全局代理模式)
-telegram频道: @wtdnwbzda
-"
