@@ -1,0 +1,11 @@
+rule-providers:
+  ad:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/heinu112/fuck-you-ads/main/antiad.yaml"
+    path: ./rule_providers/antiad.yaml
+    interval: 21600
+rules:
+  - PROCESS-NAME,clashMeta,REJECT # 解决回环 注意:需要填写clash内核的进程名
+  - RULE-SET,ad,REJECT # 去广告
+  - MATCH,代理设置
