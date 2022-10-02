@@ -1,4 +1,5 @@
 proxies:
+  - {name: 百度系免流, type: http, server: 百度系免流ip, port: 443, headers: {X-T5-Auth: 1962898709, User-Agent: "okhttp/3.11.0 Dalvik/2.1.0 (Linux; U; Android 12; Redmi K50 Build/RKQ1.200826.002) baiduboxapp/11.0.5.12 (Baidu; P1 11"}}
 p: &p
   type: http
   interval: 1800
@@ -19,6 +20,7 @@ proxy-groups:
     type: select
     proxies:
       - 机场1
+      - 本地免流
       - 关闭代理
 
   - name: 机场1
@@ -26,7 +28,30 @@ proxy-groups:
     use:
       - 机场1
 
+  - name: 本地免流
+    type: select
+    proxies:
+      - 百度系免流
+
   - name: 关闭代理
     type: select
     proxies:
       - DIRECT
+rule-providers:
+  ad:
+    type: http
+    behavior: domain
+    url: "https://raw.githubusercontent.com/heinu112/fuck-you-ads/main/antiad.yaml"
+    path: ./rule_providers/antiad.yaml
+    interval: 21600
+  whitelist:
+    type: file
+    behavior: domain
+    path: ./rule_providers/whitelist.yaml
+rules:
+  - AND,((DST-PORT,5228-5230),(NETWORK,TCP),(DOMAIN-KEYWORD,google)),DIRECT # 解决回环
+  - PROCESS-NAME,clashMeta,REJECT # 解决回环
+  - PROCESS-NAME,clash,REJECT # 解决回环
+  - RULE-SET,whitelist,本地免流 # 白名单
+  - RULE-SET,ad,REJECT # 去广告
+  - MATCH,代理设置

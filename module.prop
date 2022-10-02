@@ -1,7 +1,7 @@
 id=Clash_For_Magisk
 name=Clash For Magisk
-version=v13
-versionCode=13
+version=v17
+versionCode=17
 author=黑弩
 description=利用tproxy支持Clash的透明代理.内置DashBoard-v5.3.r184.fc6e121
 updateJson=https://raw.githubusercontent.com/heinu112/clash_for_magisk/update/update.json

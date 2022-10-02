@@ -122,7 +122,11 @@ find_packages_uid() {
         mode=blacklist
         uids=""
     else
-        uids=$(cat ${filter_packages_file})
+        if [ ${proxyGoogle} == "true" ];then
+            uids=$(cat ${filter_packages_file} ${Clash_run_path}/Google.dat)
+        else
+            uids=$(cat ${filter_packages_file})
+        fi
     fi
     for package in $uids; do
         if [ "${Clash_enhanced_mode}" == "fake-ip" ] && [ "${Clash_tun_status}" != "true" ]; then
